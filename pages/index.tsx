@@ -1,6 +1,7 @@
 import Head from "next/head";
 import React from "react";
-import { Container } from "@mui/material";
+import { Button, Container } from "@mui/material";
+import ChessBoard from "@/components/board/ChessBoard";
 
 export default function Home() {
   return (
@@ -11,8 +12,17 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Container maxWidth="sm">
-        <span>hello world</span>
+      <Container maxWidth="md">
+        <h1 style={{ textAlign: "center" }}>
+          Learn chess coordinates by practicing it!
+        </h1>
+        <Button
+          variant="outlined"
+          style={{ margin: "0 auto", display: "block", marginBottom: "20px" }}
+        >
+          Start!
+        </Button>
+        <ChessBoard />
       </Container>
     </>
   );
