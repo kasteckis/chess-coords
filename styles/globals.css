@@ -7,8 +7,8 @@ h1, h2, h3, h4, h5 {
 }
 
 .button-center {
-    display: block;
-    margin: 0 auto 20px;
+    display: block !important;
+    margin: 0 auto 20px !important;
 }
 
 .div-dark-square {
