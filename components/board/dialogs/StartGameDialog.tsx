@@ -14,15 +14,15 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import {GameTypeEnum} from "@/utils/utils";
+import {GameTypeEnum, StartGameFormValues} from "@/utils/utils";
 
 interface Props {
   open: boolean;
   handleClose: () => void;
-  handleOpen: () => void;
+  handleStartGame: (values: StartGameFormValues) => void;
 }
 
-const StartGameDialog = ({ open, handleClose, handleOpen }: Props) => {
+const StartGameDialog = ({ open, handleClose, handleStartGame }: Props) => {
   const validationSchema = yup.object({
     gameType: yup.mixed<GameTypeEnum>().oneOf(Object.values(GameTypeEnum))
         .required(),
@@ -33,9 +33,8 @@ const StartGameDialog = ({ open, handleClose, handleOpen }: Props) => {
       gameType: GameTypeEnum.White,
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      console.log(values);
-      alert('Todo start game');
+    onSubmit: async (values: StartGameFormValues) => {
+      handleStartGame(values);
     },
   });
 

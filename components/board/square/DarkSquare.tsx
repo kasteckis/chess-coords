@@ -2,15 +2,22 @@ import React from "react";
 
 const squareSize = "100px";
 
-const DarkSquare = () => {
+interface Props {
+    coordinate: string;
+    selected: boolean;
+    handleCoordinateClick: (coordinate: string) => () => void;
+}
+
+const DarkSquare = ({ coordinate, selected, handleCoordinateClick }: Props) => {
   return (
     <div
       style={{
         width: squareSize,
         height: squareSize,
-        backgroundColor: "#789952",
+        backgroundColor: selected ? "#ea7e6a" : "#789952",
         display: "inline-block",
       }}
+      onClick={handleCoordinateClick(coordinate)}
     ></div>
   );
 };
