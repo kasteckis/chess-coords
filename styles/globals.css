@@ -37,3 +37,28 @@ h1, h2, h3, h4, h5 {
     justify-content: center;
     align-items: center;
 }
+
+@media only screen and (max-width: 768px) {
+    /*mobile*/
+
+    .div-dark-square {
+        width: 50px;
+        height: 50px;
+        background-color: #789952;
+        display: inline-block;
+    }
+
+    .div-light-square {
+        width: 50px;
+        height: 50px;
+        background-color: #ededd1;
+        display: inline-block;
+    }
+
+    .div-selected-square {
+        width: 50px;
+        height: 50px;
+        background-color: #ea7e6a;
+        display: inline-block;
+    }
+}
