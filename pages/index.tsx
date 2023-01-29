@@ -15,6 +15,7 @@ export default function Home() {
   const [selectedCoordinate, setSelectedCoordinate] = useState<
     string | undefined
   >(undefined);
+  const [streak, setStreak] = useState<number>(0);
 
   const handleStartGameDialogClose = () => {
     setStartGameDialogOpen(false);
@@ -29,7 +30,7 @@ export default function Home() {
       setSelectedCoordinate(coordinate);
 
       if (coordinate === desiredCoordinate) {
-        // Todo add some logic, like some kind of streak counter
+        setStreak(streak + 1);
         setDesiredCoordinate(
           chessCoordinates[Math.floor(Math.random() * chessCoordinates.length)]
         );
@@ -43,6 +44,7 @@ export default function Home() {
     setGameStarted(false);
     setDesiredCoordinate(undefined);
     setSelectedCoordinate(undefined);
+    setStreak(0);
   };
 
   const handleStartGame = (values: StartGameFormValues) => {
@@ -68,7 +70,8 @@ export default function Home() {
       <Container maxWidth="md">
         {gameStarted ? (
           <>
-            <h1>{desiredCoordinate}</h1>
+            <h1 className="m-0">{desiredCoordinate}</h1>
+            <h3 className="m-0">Streak: {streak}</h3>
           </>
         ) : (
           <>
