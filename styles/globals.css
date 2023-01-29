@@ -1,0 +1,35 @@
+h1 {
+    text-align: center;
+}
+
+.button-center {
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.div-dark-square {
+    width: 100px;
+    height: 100px;
+    background-color: #789952;
+    display: inline-block;
+}
+
+.div-light-square {
+    width: 100px;
+    height: 100px;
+    background-color: #ededd1;
+    display: inline-block;
+}
+
+.div-selected-square {
+    width: 100px;
+    height: 100px;
+    background-color: #ea7e6a;
+    display: inline-block;
+}
+
+.box-flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

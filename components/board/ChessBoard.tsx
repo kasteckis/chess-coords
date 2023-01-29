@@ -12,13 +12,7 @@ const ChessBoard = ({ selectedCoordinate, handleCoordinateClick }: Props) => {
   return (
     <>
       <Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <Box className="box-flex-center">
           <LightSquare
             selected={selectedCoordinate === "A8"}
             coordinate={"A8"}
@@ -60,13 +54,7 @@ const ChessBoard = ({ selectedCoordinate, handleCoordinateClick }: Props) => {
             handleCoordinateClick={handleCoordinateClick}
           />
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <Box className="box-flex-center">
           <DarkSquare
             selected={selectedCoordinate === "A7"}
             coordinate={"A7"}
@@ -108,13 +96,7 @@ const ChessBoard = ({ selectedCoordinate, handleCoordinateClick }: Props) => {
             handleCoordinateClick={handleCoordinateClick}
           />
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <Box className="box-flex-center">
           <LightSquare
             selected={selectedCoordinate === "A6"}
             coordinate={"A6"}
@@ -156,13 +138,7 @@ const ChessBoard = ({ selectedCoordinate, handleCoordinateClick }: Props) => {
             handleCoordinateClick={handleCoordinateClick}
           />
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <Box className="box-flex-center">
           <DarkSquare
             selected={selectedCoordinate === "A5"}
             coordinate={"A5"}
@@ -204,13 +180,7 @@ const ChessBoard = ({ selectedCoordinate, handleCoordinateClick }: Props) => {
             handleCoordinateClick={handleCoordinateClick}
           />
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <Box className="box-flex-center">
           <LightSquare
             selected={selectedCoordinate === "A4"}
             coordinate={"A4"}
@@ -252,13 +222,7 @@ const ChessBoard = ({ selectedCoordinate, handleCoordinateClick }: Props) => {
             handleCoordinateClick={handleCoordinateClick}
           />
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <Box className="box-flex-center">
           <DarkSquare
             selected={selectedCoordinate === "A3"}
             coordinate={"A3"}
@@ -300,13 +264,7 @@ const ChessBoard = ({ selectedCoordinate, handleCoordinateClick }: Props) => {
             handleCoordinateClick={handleCoordinateClick}
           />
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <Box className="box-flex-center">
           <LightSquare
             selected={selectedCoordinate === "A2"}
             coordinate={"A2"}
@@ -348,13 +306,7 @@ const ChessBoard = ({ selectedCoordinate, handleCoordinateClick }: Props) => {
             handleCoordinateClick={handleCoordinateClick}
           />
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+        <Box className="box-flex-center">
           <DarkSquare
             selected={selectedCoordinate === "A1"}
             coordinate={"A1"}

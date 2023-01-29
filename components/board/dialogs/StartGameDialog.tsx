@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import {GameTypeEnum, StartGameFormValues} from "@/utils/utils";
+import { GameTypeEnum, StartGameFormValues } from "@/utils/utils";
 
 interface Props {
   open: boolean;
@@ -24,8 +24,10 @@ interface Props {
 
 const StartGameDialog = ({ open, handleClose, handleStartGame }: Props) => {
   const validationSchema = yup.object({
-    gameType: yup.mixed<GameTypeEnum>().oneOf(Object.values(GameTypeEnum))
-        .required(),
+    gameType: yup
+      .mixed<GameTypeEnum>()
+      .oneOf(Object.values(GameTypeEnum))
+      .required(),
   });
 
   const formik = useFormik({
@@ -43,15 +45,15 @@ const StartGameDialog = ({ open, handleClose, handleStartGame }: Props) => {
       <form onSubmit={formik.handleSubmit}>
         <DialogTitle>Start Game</DialogTitle>
         <DialogContent>
-          <FormControl fullWidth sx={{marginTop: '5px'}}>
+          <FormControl fullWidth sx={{ mt: 0.5 }}>
             <InputLabel>You play as</InputLabel>
             <Select
-                id="gameType"
-                name="gameType"
-                value={formik.values.gameType}
-                label="You play as"
-                onChange={formik.handleChange}
-                variant="standard"
+              id="gameType"
+              name="gameType"
+              value={formik.values.gameType}
+              label="You play as"
+              onChange={formik.handleChange}
+              variant="standard"
             >
               <MenuItem value={GameTypeEnum.White}>White</MenuItem>
               <MenuItem value={GameTypeEnum.Black}>Black</MenuItem>

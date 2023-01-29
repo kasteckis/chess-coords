@@ -9,7 +9,9 @@ export default function Home() {
   const [startGameDialogOpen, setStartGameDialogOpen] =
     useState<boolean>(false);
   const [gameStarted, setGameStarted] = useState<boolean>(false);
-  const [desiredCoordinate, setDesiredCoordinate] = useState<string|undefined>(undefined);
+  const [desiredCoordinate, setDesiredCoordinate] = useState<
+    string | undefined
+  >(undefined);
   const [selectedCoordinate, setSelectedCoordinate] = useState<
     string | undefined
   >(undefined);
@@ -29,7 +31,7 @@ export default function Home() {
       if (coordinate === desiredCoordinate) {
         // Todo add some logic, like some kind of streak counter
         setDesiredCoordinate(
-            chessCoordinates[Math.floor(Math.random() * chessCoordinates.length)]
+          chessCoordinates[Math.floor(Math.random() * chessCoordinates.length)]
         );
       } else {
         handleResetGame();
@@ -41,7 +43,7 @@ export default function Home() {
     setGameStarted(false);
     setDesiredCoordinate(undefined);
     setSelectedCoordinate(undefined);
-  }
+  };
 
   const handleStartGame = (values: StartGameFormValues) => {
     console.log(values); // todo implement this logic
@@ -66,20 +68,14 @@ export default function Home() {
       <Container maxWidth="md">
         {gameStarted ? (
           <>
-            <h1 style={{ textAlign: "center" }}>{desiredCoordinate}</h1>
+            <h1>{desiredCoordinate}</h1>
           </>
         ) : (
           <>
-            <h1 style={{ textAlign: "center" }}>
-              Learn chess coordinates by practicing it!
-            </h1>
+            <h1>Learn chess coordinates by practicing it!</h1>
             <Button
               variant="outlined"
-              style={{
-                margin: "0 auto",
-                display: "block",
-                marginBottom: "20px",
-              }}
+              className="button-center"
               onClick={handleStartGameDialogOpen}
             >
               Start!

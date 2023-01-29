@@ -11,12 +11,7 @@ interface Props {
 const DarkSquare = ({ coordinate, selected, handleCoordinateClick }: Props) => {
   return (
     <div
-      style={{
-        width: squareSize,
-        height: squareSize,
-        backgroundColor: selected ? "#ea7e6a" : "#789952",
-        display: "inline-block",
-      }}
+      className={selected ? "div-selected-square" : "div-dark-square"}
       onClick={handleCoordinateClick(coordinate)}
     ></div>
   );

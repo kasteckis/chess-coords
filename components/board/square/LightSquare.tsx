@@ -15,12 +15,7 @@ const LightSquare = ({
 }: Props) => {
   return (
     <div
-      style={{
-        width: squareSize,
-        height: squareSize,
-        backgroundColor: selected ? "#ea7e6a" : "#ededd1",
-        display: "inline-block",
-      }}
+      className={selected ? "div-selected-square" : "div-light-square"}
       onClick={handleCoordinateClick(coordinate)}
     ></div>
   );
