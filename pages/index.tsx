@@ -2,8 +2,20 @@ import Head from "next/head";
 import React from "react";
 import { Button, Container } from "@mui/material";
 import ChessBoard from "@/components/board/ChessBoard";
+import StartGameDialog from "@/components/board/dialogs/StartGameDialog";
 
 export default function Home() {
+  const [startGameDialogOpen, setStartGameDialogOpen] =
+    React.useState<boolean>(false);
+
+  const handleStartGameDialogClose = () => {
+    setStartGameDialogOpen(false);
+  };
+
+  const handleStartGameDialogOpen = () => {
+    setStartGameDialogOpen(true);
+  };
+
   return (
     <>
       <Head>
@@ -19,11 +31,17 @@ export default function Home() {
         <Button
           variant="outlined"
           style={{ margin: "0 auto", display: "block", marginBottom: "20px" }}
+          onClick={handleStartGameDialogOpen}
         >
           Start!
         </Button>
         <ChessBoard />
       </Container>
+      <StartGameDialog
+        open={startGameDialogOpen}
+        handleClose={handleStartGameDialogClose}
+        handleOpen={handleStartGameDialogOpen}
+      />
     </>
   );
 }
