@@ -9,7 +9,7 @@ export default function Home() {
   const [startGameDialogOpen, setStartGameDialogOpen] =
     useState<boolean>(false);
   const [gameStarted, setGameStarted] = useState<boolean>(false);
-  const [desiredCoordinate, setDesiredCoordinate] = useState<string>("");
+  const [desiredCoordinate, setDesiredCoordinate] = useState<string|undefined>(undefined);
   const [selectedCoordinate, setSelectedCoordinate] = useState<
     string | undefined
   >(undefined);
@@ -23,8 +23,25 @@ export default function Home() {
   };
 
   const handleCoordinateClick = (coordinate: string) => () => {
-    setSelectedCoordinate(coordinate);
+    if (gameStarted) {
+      setSelectedCoordinate(coordinate);
+
+      if (coordinate === desiredCoordinate) {
+        // Todo add some logic, like some kind of streak counter
+        setDesiredCoordinate(
+            chessCoordinates[Math.floor(Math.random() * chessCoordinates.length)]
+        );
+      } else {
+        handleResetGame();
+      }
+    }
   };
+
+  const handleResetGame = () => {
+    setGameStarted(false);
+    setDesiredCoordinate(undefined);
+    setSelectedCoordinate(undefined);
+  }
 
   const handleStartGame = (values: StartGameFormValues) => {
     console.log(values); // todo implement this logic
