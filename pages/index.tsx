@@ -3,11 +3,17 @@ import React, { useState } from "react";
 import { Button, Container } from "@mui/material";
 import ChessBoard from "@/components/board/ChessBoard";
 import StartGameDialog from "@/components/board/dialogs/StartGameDialog";
-import { chessCoordinates, StartGameFormValues } from "@/utils/utils";
+import {
+  chessCoordinates,
+  GameTypeEnum,
+  StartGameFormValues,
+} from "@/utils/utils";
+import GameOverDialog from "@/components/board/dialogs/GameOverDialog";
 
 export default function Home() {
   const [startGameDialogOpen, setStartGameDialogOpen] =
     useState<boolean>(false);
+  const [gameOverDialog, setGameOverDialog] = useState<boolean>(false);
   const [gameStarted, setGameStarted] = useState<boolean>(false);
   const [desiredCoordinate, setDesiredCoordinate] = useState<
     string | undefined
@@ -25,6 +31,11 @@ export default function Home() {
     setStartGameDialogOpen(true);
   };
 
+  const handleGameOverDialogClose = () => {
+    handleResetGame();
+    setGameOverDialog(false);
+  };
+
   const handleCoordinateClick = (coordinate: string) => () => {
     if (gameStarted) {
       setSelectedCoordinate(coordinate);
@@ -35,7 +46,7 @@ export default function Home() {
           chessCoordinates[Math.floor(Math.random() * chessCoordinates.length)]
         );
       } else {
-        handleResetGame();
+        setGameOverDialog(true);
       }
     }
   };
@@ -50,10 +61,18 @@ export default function Home() {
   const handleStartGame = (values: StartGameFormValues) => {
     console.log(values); // todo implement this logic
     handleStartGameDialogClose();
+    handleGameOverDialogClose();
     setGameStarted(true);
     setDesiredCoordinate(
       chessCoordinates[Math.floor(Math.random() * chessCoordinates.length)]
     );
+  };
+
+  const handleRestartGame = () => {
+    handleResetGame();
+    handleStartGame({
+      gameType: GameTypeEnum.White, // TODO: Veliau turbut is localStorage ar state kazkokio pasiimt reiksmes?
+    });
   };
 
   return (
@@ -94,6 +113,12 @@ export default function Home() {
         open={startGameDialogOpen}
         handleClose={handleStartGameDialogClose}
         handleStartGame={handleStartGame}
+      />
+      <GameOverDialog
+        open={gameOverDialog}
+        handleClose={handleGameOverDialogClose}
+        restartGame={handleRestartGame}
+        streak={streak}
       />
     </>
   );
