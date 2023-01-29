@@ -4,17 +4,19 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   FormControl,
   InputLabel,
   MenuItem,
-  Select,
-  TextField,
+  Select, TextField,
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { GameTypeEnum, StartGameFormValues } from "@/utils/utils";
+import {
+  GameTypeEnum,
+  StartGameFormValues,
+  StartGameFormValuesDefault,
+} from "@/utils/utils";
 
 interface Props {
   open: boolean;
@@ -31,9 +33,7 @@ const StartGameDialog = ({ open, handleClose, handleStartGame }: Props) => {
   });
 
   const formik = useFormik({
-    initialValues: {
-      gameType: GameTypeEnum.White,
-    },
+    initialValues: StartGameFormValuesDefault,
     validationSchema: validationSchema,
     onSubmit: async (values: StartGameFormValues) => {
       handleStartGame(values);
@@ -48,6 +48,7 @@ const StartGameDialog = ({ open, handleClose, handleStartGame }: Props) => {
           <FormControl fullWidth sx={{ mt: 0.5 }}>
             <InputLabel>You play as</InputLabel>
             <Select
+              disabled={true} // TODO: Once you can play as black, delete this
               id="gameType"
               name="gameType"
               value={formik.values.gameType}
@@ -58,6 +59,18 @@ const StartGameDialog = ({ open, handleClose, handleStartGame }: Props) => {
               <MenuItem value={GameTypeEnum.White}>White</MenuItem>
               <MenuItem value={GameTypeEnum.Black}>Black</MenuItem>
             </Select>
+            <TextField
+                fullWidth
+                id="time"
+                name="time"
+                label="Time in seconds"
+                variant="standard"
+                type="number"
+                value={formik.values.time}
+                onChange={formik.handleChange}
+                error={formik.touched.time && Boolean(formik.errors.time)}
+                helperText={formik.touched.time && formik.errors.time}
+            />
           </FormControl>
         </DialogContent>
         <DialogActions>

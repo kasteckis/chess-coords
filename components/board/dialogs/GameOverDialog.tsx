@@ -24,7 +24,7 @@ const GameOverDialog = ({ open, restartGame, handleClose, streak }: Props) => {
   });
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={open}>
       <form onSubmit={formik.handleSubmit}>
         <DialogTitle>Game Over</DialogTitle>
         <DialogContent>

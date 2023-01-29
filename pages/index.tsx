@@ -4,11 +4,12 @@ import { Button, Container } from "@mui/material";
 import ChessBoard from "@/components/board/ChessBoard";
 import StartGameDialog from "@/components/board/dialogs/StartGameDialog";
 import {
-  chessCoordinates,
-  GameTypeEnum,
+  getRandomChessCoordinate,
   StartGameFormValues,
+  StartGameFormValuesDefault,
 } from "@/utils/utils";
 import GameOverDialog from "@/components/board/dialogs/GameOverDialog";
+import {useTimer} from "react-timer-hook";
 
 export default function Home() {
   const [startGameDialogOpen, setStartGameDialogOpen] =
@@ -22,6 +23,27 @@ export default function Home() {
     string | undefined
   >(undefined);
   const [streak, setStreak] = useState<number>(0);
+  const [gameSettings, setGameSettings] = useState<StartGameFormValues>(
+    StartGameFormValuesDefault
+  );
+
+  const {
+    seconds,
+    minutes,
+    hours,
+    days,
+    isRunning,
+    start,
+    pause,
+    resume,
+    restart,
+  } = useTimer({
+    autoStart: false,
+    expiryTimestamp: new Date(),
+    onExpire: () => {
+      handleGameOver();
+    },
+  });
 
   const handleStartGameDialogClose = () => {
     setStartGameDialogOpen(false);
@@ -42,11 +64,9 @@ export default function Home() {
 
       if (coordinate === desiredCoordinate) {
         setStreak(streak + 1);
-        setDesiredCoordinate(
-          chessCoordinates[Math.floor(Math.random() * chessCoordinates.length)]
-        );
+        setDesiredCoordinate(getRandomChessCoordinate(coordinate));
       } else {
-        setGameOverDialog(true);
+        handleGameOver();
       }
     }
   };
@@ -59,21 +79,26 @@ export default function Home() {
   };
 
   const handleStartGame = (values: StartGameFormValues) => {
-    console.log(values); // todo implement this logic
+    const now = new Date();
+    now.setSeconds(now.getSeconds() + values.time);
+    restart(now);
+
+    setGameSettings(values);
     handleStartGameDialogClose();
     handleGameOverDialogClose();
     setGameStarted(true);
-    setDesiredCoordinate(
-      chessCoordinates[Math.floor(Math.random() * chessCoordinates.length)]
-    );
+    setDesiredCoordinate(getRandomChessCoordinate());
   };
 
   const handleRestartGame = () => {
     handleResetGame();
-    handleStartGame({
-      gameType: GameTypeEnum.White, // TODO: Veliau turbut is localStorage ar state kazkokio pasiimt reiksmes?
-    });
+    handleStartGame(gameSettings);
   };
+
+  const handleGameOver = () => {
+    pause();
+    setGameOverDialog(true);
+  }
 
   return (
     <>
@@ -91,6 +116,7 @@ export default function Home() {
           <>
             <h1 className="m-0">{desiredCoordinate}</h1>
             <h3 className="m-0">Streak: {streak}</h3>
+            <h3 className="m-0">Time left: {minutes}:{seconds}s</h3>
           </>
         ) : (
           <>
